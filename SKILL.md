@@ -39,6 +39,8 @@ Em conteúdo financeiro, diferencie despesas, poder de compra e custo de oportun
 5. Confira decodificação integral, duração, dimensões, áudio sem saturação, leitura do QR **no MP4 exportado** e finais das palavras. Transcrição automática auxilia, mas não comprova ausência de sotaque ou corte fonético.
 6. Entregue MP4 reproduzível, SRT e roteiro final. Preserve versões. Aprovar um vídeo não autoriza publicá-lo: confirme destino e ação quando houver pedido de publicação.
 
+Na publicação de infográficos deste estilo, não ative automaticamente o rótulo manual de IA apenas por serem ilustrações narradas. Essa é a preferência do usuário. Se a plataforma exigir identificação para características específicas do conteúdo, explique a exigência antes de publicar; não presuma uma dispensa geral nem tente ocultar rótulos aplicados pela própria plataforma.
+
 ## Dependências e distribuição
 
 Instalar esta skill não instala VoiceStudio nem pesos de voz/transcrição. Verifique o ambiente; não troque a voz ou contrate um serviço automaticamente se faltar uma dependência.
