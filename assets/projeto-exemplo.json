@@ -1,0 +1,8 @@
+{
+  "title": "Como comparar imóveis",
+  "scenes": [
+    {"id":"abertura","eyebrow":"ESCOLHA COM CRITÉRIO","title":"Qual imóvel\nfaz sentido para você?","kind":"building","narration":"Um bom imóvel precisa fazer sentido para a sua rotina. Antes de escolher, compare mais do que o preço.","note":"Compare o que importa para você."},
+    {"id":"comparacao","eyebrow":"COMPARE AS OPÇÕES","title":"Olhe o\nconjunto.","kind":"cards","items":["Localização e rotina","Conservação do imóvel","Despesas mensais"],"narration":"Localização, conservação e despesas mensais ajudam a entender o custo de cada opção. Analise as informações antes de decidir.","note":"Use dados confirmados de cada imóvel."},
+    {"id":"compartilhar","eyebrow":"COMPARTILHE ESTA IDEIA","title":"Conhece alguém\nprocurando um imóvel?","kind":"building","narration":"Conhece alguém procurando um imóvel? Envie este vídeo para essa pessoa.","note":"Envie este vídeo."}
+  ]
+}

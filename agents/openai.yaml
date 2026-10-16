@@ -1,0 +1,4 @@
+interface:
+  display_name: "S6Vid"
+  short_description: "Vídeos ilustrados da S6 com voz e legendas"
+  default_prompt: "Use $s6vid para criar um vídeo ilustrado para o Instagram da S6 Imóveis."
