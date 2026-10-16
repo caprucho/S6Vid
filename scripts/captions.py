@@ -12,6 +12,7 @@ model_path=Path(args.model_path).resolve()
 if not model_path.is_dir() or not (model_path/'model.bin').exists():
     raise ValueError('Provide the installed faster-whisper model directory containing model.bin; this command does not download weights.')
 plan=json.loads((root/'plan.json').read_text(encoding='utf-8'));speed=plan['speed']
+cfg=json.loads((Path(__file__).resolve().parents[1]/'assets/padrao.json').read_text(encoding='utf-8'))['captions']
 model=WhisperModel(str(model_path),device='cpu',compute_type='int8',local_files_only=True)
 ff=imageio_ffmpeg.get_ffmpeg_exe()
 def norm(s):return re.sub('[^a-z0-9]','', ''.join(c for c in unicodedata.normalize('NFD',s.lower()) if unicodedata.category(c)!='Mn'))
@@ -44,10 +45,10 @@ for i,row in enumerate(plan['caption_sources']):
     print('ALIGNED',i+1,len(plan['caption_sources']),round(similarity,2),flush=True)
 font=ImageFont.truetype(str(root/'fonts/InstrumentSans-Bold.ttf'),40)
 def wrap(tokens):
-    if font.getlength(' '.join(tokens))<=850:return ' '.join(tokens)
+    if font.getlength(' '.join(tokens))<=cfg['max_width']:return ' '.join(tokens)
     candidates=[(' '.join(tokens[:i]),' '.join(tokens[i:])) for i in range(1,len(tokens))]
     best=min(candidates,key=lambda p:max(font.getlength(p[0]),font.getlength(p[1]))+.08*abs(font.getlength(p[0])-font.getlength(p[1])))
-    assert max(map(font.getlength,best))<=870,best
+    assert max(map(font.getlength,best))<=cfg['max_width'],best
     return '\n'.join(best)
 groups=[];current=[]
 for w in allwords:
@@ -79,11 +80,12 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,Instrument Sans,40,&H00EFF5F7,&H005CA4C4,&H00151311,&H80151311,-1,0,0,0,100,100,0,0,1,1.5,1.5,2,105,105,1160,1
+Style: Default,Instrument Sans,40,&H00EFF5F7,&H005CA4C4,&H00151311,&H80151311,-1,0,0,0,100,100,0,0,1,1.5,1.5,2,{margin_left},{margin_right},{margin_vertical},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 '''
+ass=ass.format(margin_left=cfg['margin_left'],margin_right=cfg['margin_right'],margin_vertical=cfg['margin_vertical'])
 keys={'anuncio','imovel','espera','preco','condominio','iptu','inflacao','cdb','mercado','envie','vendendo'}
 for c in captions:
     tokens=c['text'].split(' ');colored=False

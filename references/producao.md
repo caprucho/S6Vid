@@ -22,4 +22,6 @@ python scripts/video.py verify outputs/video-s6vid.mp4 --qr-url https://s6imovei
 
 `render` exige legendas e as grava no vídeo. Caminhos de arquivos no projeto são relativos ao JSON do projeto. Scripts e recursos não dependem das pastas do criador da skill.
 
+`preview` também gera `storyboard-interface.jpg` e `preview-interface-*.png`, com máscaras ilustrativas do cabeçalho, controles laterais e descrição do Instagram. Inclui a primeira cena de conteúdo após a abertura. Revise todos esses quadros; logo, chamada, título, notas, site e QR devem ficar dentro da área segura definida em `assets/padrao.json`. As legendas reais devem ser conferidas no MP4 com a mesma área reservada. Máscaras são uma simulação conservadora, não uma cópia exata da interface atual.
+
 Verifique o MP4 inteiro, início das cenas em movimento, leitura em celular, sobreposição de texto, finais de palavras e QR decodificado de um quadro do arquivo final. Compare a música com a fala. Preserve versões anteriores e não publique automaticamente após a aprovação da edição.

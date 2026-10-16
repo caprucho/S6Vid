@@ -1,13 +1,54 @@
 {
   "name": "S6Vid",
-  "video": {"width": 1080, "height": 1920, "fps": 24, "speed": 1.25, "opening_seconds": 3.5, "closing_seconds": 8},
-  "brand": {"background": "#111315", "panel": "#191C1F", "gold": "#C4A45C", "white": "#F7F5EF", "gray": "#A5A7A8", "site": "s6imoveis.com.br", "url": "https://s6imoveis.com.br/"},
-  "voice": {
-    "engine": "voxcpm2", "profile_name": "S6Vid — voz feminina aprovada",
-    "reference": "voz-aprovada.wav", "language": "pt", "seed": 8459,
-    "transcript": "Pode acontecer de você conseguir um valor melhor esperando um pouco. Mas, antes de decidir, vale fazer uma conta: quanto essa espera pode custar? Condomínio, IPTU e manutenção continuam chegando.",
-    "gain": 0.8, "native_speed": 1.0, "chunk_characters": 215, "pause_seconds": 0.26
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 24,
+    "speed": 1.25,
+    "opening_seconds": 3.5,
+    "closing_seconds": 8,
+    "safe_area": {
+      "left": 90,
+      "top": 300,
+      "right": 900,
+      "bottom": 1540
+    }
   },
-  "music": {"asset": "trilha-original.mp3", "relative_to_active_speech_db": -29, "fade_in": 0.7, "fade_out": 1.8},
-  "captions": {"font": "Instrument Sans", "size": 40, "margin_vertical": 1160, "max_words": 7, "max_lines": 2}
+  "brand": {
+    "background": "#111315",
+    "panel": "#191C1F",
+    "gold": "#C4A45C",
+    "white": "#F7F5EF",
+    "gray": "#A5A7A8",
+    "site": "s6imoveis.com.br",
+    "url": "https://s6imoveis.com.br/"
+  },
+  "voice": {
+    "engine": "voxcpm2",
+    "profile_name": "S6Vid — voz feminina aprovada",
+    "reference": "voz-aprovada.wav",
+    "language": "pt",
+    "seed": 8459,
+    "transcript": "Pode acontecer de você conseguir um valor melhor esperando um pouco. Mas, antes de decidir, vale fazer uma conta: quanto essa espera pode custar? Condomínio, IPTU e manutenção continuam chegando.",
+    "gain": 0.8,
+    "native_speed": 1.0,
+    "chunk_characters": 215,
+    "pause_seconds": 0.26
+  },
+  "music": {
+    "asset": "trilha-original.mp3",
+    "relative_to_active_speech_db": -29,
+    "fade_in": 0.7,
+    "fade_out": 1.8
+  },
+  "captions": {
+    "font": "Instrument Sans",
+    "size": 40,
+    "margin_vertical": 1090,
+    "max_words": 7,
+    "max_lines": 2,
+    "margin_left": 90,
+    "margin_right": 180,
+    "max_width": 790
+  }
 }

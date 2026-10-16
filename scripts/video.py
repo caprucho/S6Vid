@@ -14,7 +14,7 @@ def font(n,b=False):
 def image(scene,t=5,opening=False,closing=False,url=None):
     im=Image.new('RGB',(W,H),BG);d=ImageDraw.Draw(im)
     def text(xy,s,n=42,b=False,color=WHITE,anchor=None):
-        maximum=924 if anchor and 'm' in anchor else W-xy[0]-78
+        maximum=790 if anchor and 'm' in anchor else 900-xy[0]
         while n>24 and any(font(n,b).getlength(line)>maximum for line in s.split('\n')):n-=1
         d.multiline_text(xy,s,font=font(n,b),fill=color,anchor=anchor,spacing=14,align='center' if anchor and 'm' in anchor else 'left')
     def logo(x,y,w):
@@ -28,33 +28,33 @@ def image(scene,t=5,opening=False,closing=False,url=None):
                     d.rectangle((xx,yy,xx+w*.15,yy+40),fill=GOLD if (row+col)%4==0 else BG,outline=GOLD,width=2)
         d.rectangle((x+w*.4,y+h-60,x+w*.62,y+h),fill=BG,outline=GOLD,width=4)
     site=CFG['brand']['site'];target=url or CFG['brand']['url']
-    d.line((72,1770,1008,1770),fill='#383B3E',width=2);text((540,1836),site,39,color=GOLD,anchor='mm')
+    d.line((90,1470,900,1470),fill='#383B3E',width=2);text((495,1510),site,35,color=GOLD,anchor='mm')
     if closing:
-        logo(396,92,288);text((540,688),scene.get('title','Seu imóvel merece\numa boa estratégia.'),78,True,anchor='mm');text((540,868),scene.get('cta','Converse com a S6 Imóveis.'),43,color=GOLD,anchor='mm')
+        logo(405,310,180);text((495,700),scene.get('title','Seu imóvel merece\numa boa estratégia.'),72,True,anchor='mm');text((495,850),scene.get('cta','Converse com a S6 Imóveis.'),43,color=GOLD,anchor='mm')
         qr=qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H,box_size=16,border=4);qr.add_data(target);qr.make(fit=True)
-        q=qr.make_image(fill_color='black',back_color='white').convert('RGB').resize((522,522),Image.Resampling.NEAREST);im.paste(q,(279,987));text((540,1586),'Aponte a câmera e acesse nosso site.',37,anchor='mm');return im
+        q=qr.make_image(fill_color='black',back_color='white').convert('RGB').resize((420,420),Image.Resampling.NEAREST);im.paste(q,(285,950));text((495,1420),'Aponte a câmera e acesse nosso site.',37,anchor='mm');return im
     if opening:
-        text((540,280),scene.get('eyebrow','S6 IMÓVEIS'),36,True,GOLD,'mm');text((540,435),scene['title'],81,True,anchor='mm');logo(345,840,390);return im
-    logo(78,57,132);text((78,334),scene.get('eyebrow','S6 IMÓVEIS'),30,True,GOLD);text((78,410),scene['title'],84,True);d.line((81,666,249,666),fill=GOLD,width=7)
+        text((495,350),scene.get('eyebrow','S6 IMÓVEIS'),36,True,GOLD,'mm');text((495,510),scene['title'],74,True,anchor='mm');logo(330,940,330);return im
+    logo(90,300,84);text((90,450),scene.get('eyebrow','S6 IMÓVEIS'),30,True,GOLD);text((90,510),scene['title'],74,True);d.line((90,710,240,710),fill=GOLD,width=7)
     kind=scene.get('kind','cards');items=scene.get('items',[])
-    if kind=='building':building(405,840,270,390)
+    if kind=='building':building(380,910,230,340)
     elif kind=='comparison':
-        for j,x in enumerate([78,570]):
-            d.rounded_rectangle((x,810,x+432,1450),22,fill=PANEL,outline=GOLD if j==0 else '#383B3E',width=4);building(x+105,875,220,320)
-            text((x+216,1330),items[j] if len(items)>j else ['OPÇÃO A','OPÇÃO B'][j],32,True,GOLD,'mm')
+        for j,x in enumerate([90,510]):
+            d.rounded_rectangle((x,885,x+390,1360),22,fill=PANEL,outline=GOLD if j==0 else '#383B3E',width=4);building(x+95,925,200,280)
+            text((x+195,1280),items[j] if len(items)>j else ['OPÇÃO A','OPÇÃO B'][j],32,True,GOLD,'mm')
     elif kind=='chart':
-        d.line((140,1350,945,1350),fill=GRAY,width=3);d.line((140,1350,140,840),fill=GRAY,width=3)
-        points=[(170,1300),(330,1220),(490,1160),(650,1020),(820,940),(935,870)];count=max(2,min(len(points),round(t*2)));d.line(points[:count],fill=GOLD,width=7,joint='curve')
-        text((540,1470),items[0] if items else 'ILUSTRAÇÃO DO RACIOCÍNIO',35,True,GOLD,'mm')
+        d.line((140,1300,860,1300),fill=GRAY,width=3);d.line((140,1300,140,900),fill=GRAY,width=3)
+        points=[(170,1260),(300,1200),(440,1150),(580,1040),(720,980),(850,920)];count=max(2,min(len(points),round(t*2)));d.line(points[:count],fill=GOLD,width=7,joint='curve')
+        text((495,1360),items[0] if items else 'ILUSTRAÇÃO DO RACIOCÍNIO',35,True,GOLD,'mm')
     elif kind=='clock':
-        d.ellipse((320,835,760,1275),outline=GOLD,width=7);d.line((540,880,540,1055,650,1120),fill=GOLD,width=8)
+        d.ellipse((295,900,695,1300),outline=GOLD,width=7);d.line((495,940,495,1100,595,1160),fill=GOLD,width=8)
     else:
         values=items or ['Primeiro ponto','Segundo ponto','Terceiro ponto']
         if len(values)>3:raise ValueError('Use up to three cards per scene to preserve readable space.')
         for j,value in enumerate(values):
             if t>j*.4:
-                y=810+j*205;d.rounded_rectangle((78,y,1002,y+160),20,fill=PANEL,outline='#383B3E',width=3);text((125,y+80),value,48,True,anchor='lm')
-    text((540,1660),scene.get('note',''),37,color=GRAY,anchor='mm');return im
+                y=885+j*165;d.rounded_rectangle((90,y,900,y+140),20,fill=PANEL,outline='#383B3E',width=3);text((125,y+70),value,44,True,anchor='lm')
+    text((495,1420),scene.get('note',''),37,color=GRAY,anchor='mm');return im
 def load(p):return json.loads(Path(p).read_text(encoding='utf-8'))
 def prepare(args):
     project=load(args.project);ledger_path=Path(args.ledger).resolve();ledger=load(ledger_path);work=Path(args.work).resolve();work.mkdir(parents=True,exist_ok=True)
@@ -77,13 +77,29 @@ def prepare(args):
     (work/'plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2),encoding='utf-8');fonts=work/'fonts';fonts.mkdir(exist_ok=True)
     for n in ['InstrumentSans-Regular.ttf','InstrumentSans-Bold.ttf']:shutil.copyfile(ASSETS/n,fonts/n)
     (work/'roteiro.txt').write_text('\n\n'.join(s['narration'] for s in project['scenes']),encoding='utf-8');print('PREPARED',round(total,2))
+def interface_preview(im):
+    # Illustrative overlay only; never burned into the delivered MP4.
+    overlay=Image.new('RGBA',im.size,(0,0,0,0));d=ImageDraw.Draw(overlay)
+    safe=CFG['video']['safe_area'];l,top,r,b=(safe[k] for k in ['left','top','right','bottom'])
+    for box in [(0,0,W,top),(0,b,W,H),(0,top,l,b),(r,top,W,b)]:d.rectangle(box,fill=(130,30,30,110))
+    d.rectangle((l,top,r,b),outline=(90,210,150,255),width=3)
+    d.ellipse((45,68,125,148),fill='#F7F5EF');d.text((145,78),'s6imoveis · perfil',font=font(32,True),fill='white')
+    d.text((145,120),'Áudio original',font=font(27),fill='white')
+    for y,label in [(1040,'♡'),(1170,'...'),(1300,'↗')]:d.text((950,y),label,font=font(44),fill='white')
+    d.text((90,1600),'Descrição e controles do Instagram',font=font(32,True),fill='white')
+    d.text((90,1660),'Área reservada — simulação',font=font(29),fill='white')
+    return Image.alpha_composite(im.convert('RGBA'),overlay).convert('RGB')
 def preview(args):
-    project=load(args.project);scenes=project['scenes'];work=Path(args.work);work.mkdir(parents=True,exist_ok=True);count=len(scenes)+1;sheet=Image.new('RGB',(270*min(4,count),480*math.ceil(count/4)),BG)
-    for i in range(count):
-        im=image(scenes[i],opening=i==0) if i<len(scenes) else image(project.get('closing',{}),closing=True)
-        im.save(work/f'preview-{i:02}.png');sheet.paste(im.resize((270,480),Image.Resampling.LANCZOS),((i%4)*270,(i//4)*480))
-    image(scenes[0],opening=False).save(work/'preview-first-body.png')
-    sheet.save(work/'storyboard.jpg',quality=94);print(work/'storyboard.jpg')
+    project=load(args.project);scenes=project['scenes'];work=Path(args.work);work.mkdir(parents=True,exist_ok=True)
+    frames=[image(s,opening=i==0) for i,s in enumerate(scenes)]
+    frames.append(image(project.get('closing',{}),closing=True))
+    first_body=image(scenes[0],opening=False);first_body.save(work/'preview-first-body.png')
+    frames.append(first_body)
+    count=len(frames);size=(270*min(4,count),480*math.ceil(count/4));sheet=Image.new('RGB',size,BG);ui_sheet=Image.new('RGB',size,BG)
+    for i,im in enumerate(frames):
+        im.save(work/f'preview-{i:02}.png');ui=interface_preview(im);ui.save(work/f'preview-interface-{i:02}.png')
+        at=((i%4)*270,(i//4)*480);sheet.paste(im.resize((270,480),Image.Resampling.LANCZOS),at);ui_sheet.paste(ui.resize((270,480),Image.Resampling.LANCZOS),at)
+    sheet.save(work/'storyboard.jpg',quality=94);ui_sheet.save(work/'storyboard-interface.jpg',quality=94);print(work/'storyboard-interface.jpg')
 def render(args):
     work=Path(args.work).resolve();plan=load(work/'plan.json');ass=work/'captions.ass'
     if not ass.exists():raise ValueError('Generate and review narration captions before rendering.')
